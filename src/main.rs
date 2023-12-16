@@ -3,6 +3,8 @@ use std::fs;
 use std::path::PathBuf;
 use std::time::Instant;
 
+mod day1;
+
 #[derive(Parser)]
 #[command(name = "advent-of-code-2023")]
 #[command(about = "Calculate solutions for Advent of Code 2023 using Rust and the provided input", long_about = None)]
@@ -33,8 +35,11 @@ fn load_file(filename: PathBuf) -> Option<std::string::String> {
 type SolverFn = fn(&str) -> Result<String, String>;
 
 fn solve(day: u8, part: u8) -> Result<SolverFn, (u8, u8)> {
-    let (_, _) = (day, part);
-    Err((day, part))
+    match (day, part) {
+        (1, 1) => Ok(day1::part1),
+        (1, 2) => Ok(day1::part2),
+        (_, _) => Err((day, part)),
+    }
 }
 
 fn main() {
